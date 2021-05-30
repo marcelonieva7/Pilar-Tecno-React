@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export const NavBar = () => (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
@@ -9,14 +9,14 @@ export const NavBar = () => (
         <div className="collapse navbar-collapse flex-lg-{grow|shrink}-0" id="navbarNav">
             <ul className="navbar-nav">
             <li className="nav-item">
-                <Link to={"/admin/countries"} className="nav-link">Paises</Link>
+                <NavLink to={"/countries"} className="nav-link" activeClassName="active">Paises</NavLink>
             </li>
             <li className="nav-item">
-                <Link to={"/admin/cities"} className="nav-link">Ciudades</Link>
+                <NavLink to={"/places"} className="nav-link" activeClassName="active">Ciudades</NavLink>
             </li>
             <li className="nav-item">
-                <Link to={"/admin/companies"} className="nav-link">Empresas</Link>
-            </li>
+                <NavLink to={"/organizations"} className="nav-link" activeClassName="active">Empresas</NavLink>
+            </li>            
             </ul>
         </div>
     </nav>

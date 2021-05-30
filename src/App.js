@@ -1,22 +1,20 @@
 import './App.css';
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import { NavBar } from './views/NavBar/NavBar';
-import ListContainer from './components/ListContainer/ListContainer';
 import NotFounded from './views/NotFounded/NotFounded';
+import AdminContainer from './views/AdminContainer/AdminContainer';
 
 function App() {
   return ( 
     <BrowserRouter>
       <NavBar/>
-      <div className="container-fluid mt-5">
+      <div className="container-fluid">
         <Switch>
-          <Route exact path="/" render={(props => <ListContainer {...props}/>)}>
-          </Route>
-          <Route exact path="/admin/:id" render={(props => <ListContainer {...props}/>)}>            
-          </Route>
-          <Route>
-            <NotFounded></NotFounded>
-          </Route>
+          <Route exact path="/" component={AdminContainer}/>
+          <Route exact path="/countries" component={AdminContainer}/>
+          <Route exact path="/places" component={AdminContainer}/>
+          <Route exact path="/organizations" component={AdminContainer}/>
+          <Route component={NotFounded}/>
         </Switch>
       </div>
     </BrowserRouter>

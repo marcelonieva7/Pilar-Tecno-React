@@ -1,25 +1,41 @@
-const JobsForm = ({countries, citiesOptions, companiesOptions, newJob, changeCoutry, changeCity}) => (
-    <form className="my-3 d-flex flex-column" onSubmit={newJob}>
-        <h2>Ingresar puesto</h2>
-        <div className="input-group py-4 form-row">
-            <select className="form-control mx-2 rounded" id="country" defaultValue="" name="country" onChange={changeCoutry}>
-                <option value="" >Seleccionar País</option>
-                {(countries.length && (countries.map(country=> <option key={country} value={country}>{country}</option>)))}
-            </select>
-            <select className="form-control mx-2 rounded" id="city" name="cities" defaultValue="" onChange={changeCity}>
-                <option value="" >Seleccionar Ciudad</option>
-                {citiesOptions.length && (citiesOptions.map(city=> <option key={city.city} value={city.city}>{city.city}</option>))}
-            </select>
-            <select className="form-control mx-2 rounded" id="company" name="company" defaultValue="">
-                <option value="" >Seleccionar Empresa</option>
-                {companiesOptions.length && (companiesOptions.map(company=> <option key={company.company} value={company.company}>{company.company}</option>))}
-            </select>
-            <input className="form-control mx-2 rounded" placeholder="Posición"  id="position" type="text" required/>
-        </div>
-        <div className="align-self-end">
-            <button className="btn btn-outline-primary">Agregar</button>
-        </div>
-    </form>
+import PropTypes from 'prop-types';
+import React from 'react';
+
+const JobsForm = ({countries, placesOptions, organizationsOptions, newJob, changeData}) => (
+    <React.Fragment>
+        <h2 className="my-3">Ingresar puesto</h2>
+        <form className="my-3" onSubmit={newJob}>
+            <div className="form-inline justify-content-around">
+                <select className="form-control mx-2 rounded mb-4" id="countryId" defaultValue="" name="countryId" onChange={(e)=>{changeData(e, "places", true)}}>
+                    <option value="" >Seleccionar País</option>
+                    {(countries.length && (countries.map(country=> <option key={country.id} value={country.id}>{country.name}</option>)))}
+                </select>
+                <select className="form-control mx-2 rounded mb-4" id="placeId" name="placeId" defaultValue="" onChange={(e)=>{changeData(e, "organizations", false)}}>
+                    <option value="" >Seleccionar Ciudad</option>
+                    {placesOptions.length && (placesOptions.map(place=> <option key={place.id} value={place.id}>{place.name}</option>))}
+                </select>
+                <select className="form-control mx-2 rounded mb-4" id="organizationId" name="organizationId" defaultValue="">
+                    <option value="" >Seleccionar Empresa</option>
+                    {organizationsOptions.length && (organizationsOptions.map(organization=> <option key={organization.id} value={organization.id}>{organization.name}</option>))}
+                </select>
+                <input className="form-control mx-2 rounded mb-4" placeholder="Posición" id="position" type="text" required/>
+            </div>
+            <div className="input-group">
+                <textarea className="form-control mx-2 rounded" placeholder="Descripción" name="description" type="text" required/>
+            </div>
+            <div className="align-self-end">
+                <button className="btn btn-outline-primary my-3">Agregar</button>
+            </div>
+        </form>
+    </React.Fragment>
 );
  
 export default JobsForm;
+
+JobsForm.propTypes = {
+    countries: PropTypes.array ,
+    placesOptions: PropTypes.array ,
+    organizationsOptions: PropTypes.array,
+    changeData: PropTypes.func ,
+    newJob: PropTypes.func
+};
